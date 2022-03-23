@@ -739,7 +739,7 @@
     var lastEventIdQueryParameterName = options.lastEventIdQueryParameterName || "lastEventId";
 
     var initialRetry = clampDuration(1000);
-    var heartbeatTimeout = parseDuration(options.heartbeatTimeout, 45000);
+    var heartbeatTimeout = parseDuration(options.heartbeatTimeout, MAXIMUM_DURATION);
 
     var lastEventId = "";
     var retry = initialRetry;
@@ -909,9 +909,6 @@
         var event = new ErrorEvent("error", {error: error});
         es.dispatchEvent(event);
         fire(es, es.onerror, event);
-        if (error != undefined) {
-          console.error(error);
-        }
       }
     };
 
